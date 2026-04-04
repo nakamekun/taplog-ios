@@ -1,17 +1,17 @@
-//
-//  TapLogApp.swift
-//  TapLog
-//
-//  Created by KEITA TAMURA on 2026/04/01.
-//
-
 import SwiftUI
 
 @main
 struct TapLogApp: App {
+    @StateObject private var moodStore = MoodStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if let screenshotConfiguration = ScreenshotConfiguration.current {
+                AppStoreScreenshotView(configuration: screenshotConfiguration)
+            } else {
+                MainTabView()
+                    .environmentObject(moodStore)
+            }
         }
     }
 }
